@@ -1,4 +1,4 @@
-# Oled-Menu-for-Arduino
+# oled_menu_for_arduino
 An Arduino library that makes creating simple menus on a 128x64 oled display a lot easier. 
 
 
