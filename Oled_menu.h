@@ -10,9 +10,8 @@
 class Oled_menu {
   public:
     Oled_menu();
-    void begin();
-    void config(int size, bool enableIcons); 
-    // void icons(const unsigned char* iconArray[]);
+    void begin(int size, bool enableIcons);
+    void icons(const unsigned char* iconArray);
     // insert 2D array containing your labels
     void labels(char labelArray[][_labelSize]); 
     //Draw the menu
@@ -21,6 +20,7 @@ class Oled_menu {
     void up();
     //Scroll downwards
     void down();
+    
   private:
     const uint16_t _regularFont = u8g2_font_7x13_mf;
     const uint16_t _boldFont = u8g2_font_7x13B_mf;
@@ -37,8 +37,7 @@ class Oled_menu {
     int _selected = 0;//öl
     int _previous;
     int _next;
-    // unsigned char* _temp[1];
-    // char _labels[15][11];
+    const unsigned char* _icons;
     char** _labels;
 };
 
