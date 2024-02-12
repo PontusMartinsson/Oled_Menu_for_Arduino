@@ -105,3 +105,8 @@ void Oled_menu::down() {
 
   draw();
 }
+
+void Oled_menu::jump(int item) {
+  _selected = item;
+  draw();
+}

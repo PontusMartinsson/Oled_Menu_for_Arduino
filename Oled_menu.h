@@ -11,9 +11,9 @@ class Oled_menu {
   public:
     Oled_menu();
     void begin(int size, bool enableIcons);
-    // insert 2D array containing your labels
+    //Insert 2D array containing your labels
     void labels(char labelArray[][_labelSize]); 
-    // insert 16x16 icon bitmaps
+    //Insert pointer to 16x16px icon bitmaps
     void icons(const unsigned char* iconArray[]);
     //Draw the menu
     void draw();
@@ -21,6 +21,8 @@ class Oled_menu {
     void up();
     //Scroll downwards
     void down();
+    //Jump to specific item, first item is 0
+    void jump(int item);
     
   private:
     const uint16_t _regularFont = u8g2_font_7x13_mf;
