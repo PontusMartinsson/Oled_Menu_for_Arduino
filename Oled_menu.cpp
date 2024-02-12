@@ -18,15 +18,7 @@ void Oled_menu::begin(int size, bool enableIcons) {
   Serial.begin(9600);
 }
 
-void Oled_menu::icons(const unsigned char* iconArray) {
-  _icons = iconArray;
-}
-
 void Oled_menu::labels(char labelArray[][_labelSize]) {
-  // int tempSize = _size + 1;
-
-  // Serial.println(_size);
-
   // free memory if _labels is already allocated
   if (_labels != nullptr) {
     for (int i = 0; i <= _size; i++) {
@@ -54,12 +46,16 @@ void Oled_menu::labels(char labelArray[][_labelSize]) {
   Serial.println(_labels[4]);
 }
 
+void Oled_menu::icons(const unsigned char* iconArray[]) {
+  _icons = iconArray;
+}
+
 void Oled_menu::drawItem(int item, int itemY, uint16_t font) {
   const int _iconY = itemY - 13;
   _u8g2.setFont(font);
 
 
-  // _u8g2.drawXBMP(0, itemY, 128, 21, _icons[0]);
+  _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]);
   _u8g2.drawStr(_labelX, itemY, _labels[item]);
 }
 
@@ -82,7 +78,6 @@ void Oled_menu::draw() {
   }
 
   _u8g2.clearBuffer();
-  _u8g2.drawXBMP(0, 22, 128, 21, _icons[0]);
 
   drawItem(_previous, _previousY, _regularFont);
   drawItem(_selected, _selectedY, _boldFont);
