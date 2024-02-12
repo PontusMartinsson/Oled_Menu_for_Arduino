@@ -37,7 +37,8 @@ const unsigned char bitmapLifeIcon [] PROGMEM = {
 const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIcon, bitmapTimeLimitIcon, bitmapLifeIcon};
 
 void setup() {
-  pall.begin(5, true);
+  pall.begin();
+  pall.size(5);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
@@ -46,4 +47,5 @@ void setup() {
 void loop() {
   delay(2000);
   pall.down();
+  Serial.println(pall.getSelected());
 }
