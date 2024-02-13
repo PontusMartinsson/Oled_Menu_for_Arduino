@@ -4,8 +4,7 @@
 #include "Arduino.h"
 #include <U8g2lib.h>
 
-#define _labelSize 11
-#define _iconSize 32
+#define _labelSize 18
 
 class Oled_menu {
   public:
@@ -29,10 +28,14 @@ class Oled_menu {
     // Configure all options
     void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool bold);
 
-    // Insert 2D array containing your labels
+    // Specify all labels
     void labels(char labelArray[][_labelSize]); 
-    // Insert pointer to 16x16px icon bitmaps
+    // Specify label, requires labels() to have been set
+    void setLabel(char label, int item);
+    // Specify all icons
     void icons(const unsigned char* iconArray[]);
+    // Specify icon, requires icons() to have been set
+    void setIcon(const unsigned char* icon, int item);
 
     // Draw the menu
     void draw();

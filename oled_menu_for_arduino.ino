@@ -2,8 +2,7 @@
 
 Oled_menu pall;
 
-char balls[][11] = { "gg", "hanoos", "the zaza", "bingchen", "lailo" };
-// char balls[][11] = { "", "", "", "", "" };
+char balls[][_labelSize] = { "gg", "hanoos", "the zaza", "bingchen", "lailo" };
 
 // start icon 16x16px
 const unsigned char bitmapStartIcon [] PROGMEM = {
@@ -40,7 +39,7 @@ const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIco
 void setup() {
   pall.begin();
   pall.setSize(5);
-  pall.config(5, false, true, false, false);
+  pall.config(5, false, false, false, false, false);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
@@ -48,7 +47,5 @@ void setup() {
 
 void loop() {
   delay(2000);
-  pall.enableLabels(false);
   pall.down();
-
 }
