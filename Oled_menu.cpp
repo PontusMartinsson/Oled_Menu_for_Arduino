@@ -15,22 +15,35 @@ void Oled_menu::begin() {
   Serial.begin(9600);
 }
 
-void Oled_menu::size(int size) {
+void Oled_menu::setSize(int size) {
   _size = size - 1;
 }
 
-void Oled_menu::enableScrollbar(bool enable) {
+void Oled_menu::enableOutline(bool enable) {
+  _enableOutline = enable;
+}
 
+void Oled_menu::enableScrollbar(bool enable) {
+  _enableScrollbar = enable;
+  _outlineWidth = enable ? 120 : 128;
 }
 
 void Oled_menu::enableIcons(bool enable) {
-
+  _enableIcons = enable;
+  _labelX = enable ? 25 : 6;
 }
 
-void Oled_menu::enableValues(bool enable) {
-
+void Oled_menu::enableBold(bool enable) {
+  _enableBold = enable;
 }
 
+void Oled_menu::config(int size, bool outline, bool scrollbar, bool icons, bool bold) {
+  setSize(size);
+  enableOutline(outline);
+  enableScrollbar(scrollbar);
+  enableIcons(icons);
+  enableBold(bold);
+}
 
 void Oled_menu::labels(char labelArray[][_labelSize]) {
   int tempSize = _size + 1;
@@ -61,11 +74,11 @@ void Oled_menu::icons(const unsigned char* iconArray[]) {
   _icons = iconArray;
 }
 
-void Oled_menu::drawItem(int item, int itemY, uint16_t font) {
+void Oled_menu::drawItem(int item, int itemY) {
   const int _iconY = itemY - 13;
-  _u8g2.setFont(font);
+  _u8g2.setFont((_enableBold && item == _selected) ? _boldFont : _regularFont); // set the correct font
 
-  _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]); // draw icon
+  if (_enableIcons) { _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]); } // draw icon
   _u8g2.drawStr(_labelX, itemY, _labels[item]); // draw label
 }
 
@@ -75,10 +88,11 @@ void Oled_menu::draw() {
 
   _u8g2.clearBuffer();
 
-  _u8g2.drawRFrame(0, 22, _outlineWidth, 21, 5);
-  drawItem(_previous, _previousY, _regularFont);
-  drawItem(_selected, _selectedY, _boldFont);
-  drawItem(_next, _nextY, _regularFont);
+  if (_enableOutline) { _u8g2.drawRFrame(0, 22, _outlineWidth, 21, 5); } // draw selection outline
+
+  drawItem(_previous, _previousY);
+  drawItem(_selected, _selectedY);
+  drawItem(_next, _nextY);
 
   // draw scrollbar
   if (_enableScrollbar) {

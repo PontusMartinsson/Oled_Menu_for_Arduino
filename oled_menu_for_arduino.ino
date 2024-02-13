@@ -38,7 +38,7 @@ const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIco
 
 void setup() {
   pall.begin();
-  pall.size(5);
+  pall.config(5, true, true, true, true);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
@@ -47,5 +47,4 @@ void setup() {
 void loop() {
   delay(2000);
   pall.down();
-  Serial.println(pall.getSelected());
 }

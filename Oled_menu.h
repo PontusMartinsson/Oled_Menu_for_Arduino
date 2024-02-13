@@ -12,35 +12,37 @@ class Oled_menu {
     Oled_menu();
     void begin();
 
-    //configure all options
-    void config(int size, bool enableScrollbar, bool enableIcons, bool enableValues);
-    //set the number of menu items
-    void size(int size);
-    // enable/disable scrollbar
+    // Set the number of menu items
+    void setSize(int size);
+    // Enable/disable selection outline
+    void enableOutline(bool enable);
+    // Enable/disable scrollbar
     void enableScrollbar(bool enable);
-    // enable/disable icons
+    // Enable/disable icons
     void enableIcons(bool enable);
-    // enable/disable values
+    // Enable/disable values
     void enableValues(bool enable);
+    // Enable/disable bold text on selected item
+    void enableBold(bool enable);
+    // Configure all options
+    void config(int size, bool outline, bool scrollbar, bool icons, bool bold);
 
-    //insert 2D array containing your labels
+    // Insert 2D array containing your labels
     void labels(char labelArray[][_labelSize]); 
-    //insert pointer to 16x16px icon bitmaps
+    // Insert pointer to 16x16px icon bitmaps
     void icons(const unsigned char* iconArray[]);
 
-    //draw the menu
+    // Draw the menu
     void draw();
-    //scroll upwards
+    // Scroll upwards
     void up();
-    //scroll downwards
+    // Scroll downwards
     void down();
-    //jump to specific item, first item is 0
+    // Jump to specific item, first item is 0
     void jump(int item);
-    //returns the currently selected item
+    // Returns the currently selected item
     int getSelected();
 
-    
-    
   private:
     const uint16_t _regularFont = u8g2_font_7x13_mf;
     const uint16_t _boldFont = u8g2_font_7x13B_mf;
@@ -50,14 +52,15 @@ class Oled_menu {
 
     const int _iconX = 4;
 
-    int _labelX = 18;
+    int _labelX = 6;
     int _outlineWidth = 120;
 
-    void drawItem(int item, int itemY, uint16_t font);
+    void drawItem(int item, int itemY);
 
+    bool _enableOutline = true;
     bool _enableScrollbar = true;
     bool _enableIcons = false;
-    bool _enableValues = false;
+    bool _enableBold = true;
 
     int _size;
     int _selected = 0;//öl
