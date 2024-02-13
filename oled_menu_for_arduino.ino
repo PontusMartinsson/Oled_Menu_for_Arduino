@@ -40,7 +40,7 @@ const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIco
 void setup() {
   pall.begin();
   pall.setSize(5);
-  // pall.config(5, false, true, false, false);
+  pall.config(5, false, true, false, false);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
@@ -48,9 +48,7 @@ void setup() {
 
 void loop() {
   delay(2000);
+  pall.enableLabels(false);
   pall.down();
-  pall.enableScrollbar(true);
-  delay(2000);
-  pall.down();
-  pall.enableScrollbar(false);
+
 }

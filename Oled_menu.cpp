@@ -19,6 +19,10 @@ void Oled_menu::setSize(int size) {
   _size = size - 1;
 }
 
+void Oled_menu::enableLabels(bool enable) {
+  _enableLabels = enable;
+}
+
 void Oled_menu::enableOutline(bool enable) {
   _enableOutline = enable;
 }
@@ -37,8 +41,9 @@ void Oled_menu::enableBold(bool enable) {
   _enableBold = enable;
 }
 
-void Oled_menu::config(int size, bool outline, bool scrollbar, bool icons, bool bold) {
+void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool bold) {
   setSize(size);
+  enableLabels(labels);
   enableOutline(outline);
   enableScrollbar(scrollbar);
   enableIcons(icons);
@@ -69,7 +74,6 @@ void Oled_menu::labels(char labelArray[][_labelSize]) {
       _labels[i][j] = labelArray[i][j];
     }
   }
-
 }
 
 void Oled_menu::icons(const unsigned char* iconArray[]) {

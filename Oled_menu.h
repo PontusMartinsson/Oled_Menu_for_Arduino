@@ -14,6 +14,8 @@ class Oled_menu {
 
     // Set the number of menu items
     void setSize(int size);
+    // Enable/disable labels
+    void enableLabels(bool enable);
     // Enable/disable selection outline
     void enableOutline(bool enable);
     // Enable/disable scrollbar
@@ -25,7 +27,7 @@ class Oled_menu {
     // Enable/disable bold text on selected item
     void enableBold(bool enable);
     // Configure all options
-    void config(int size, bool outline, bool scrollbar, bool icons, bool bold);
+    void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool bold);
 
     // Insert 2D array containing your labels
     void labels(char labelArray[][_labelSize]); 
