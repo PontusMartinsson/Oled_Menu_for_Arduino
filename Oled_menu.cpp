@@ -46,6 +46,7 @@ void Oled_menu::config(int size, bool outline, bool scrollbar, bool icons, bool 
 }
 
 void Oled_menu::labels(char labelArray[][_labelSize]) {
+  _enableLabels = true;
   int tempSize = _size + 1;
 
   // free memory if _labels is already allocated
@@ -68,6 +69,7 @@ void Oled_menu::labels(char labelArray[][_labelSize]) {
       _labels[i][j] = labelArray[i][j];
     }
   }
+
 }
 
 void Oled_menu::icons(const unsigned char* iconArray[]) {
@@ -79,7 +81,7 @@ void Oled_menu::drawItem(int item, int itemY) {
   _u8g2.setFont((_enableBold && item == _selected) ? _boldFont : _regularFont); // set the correct font
 
   if (_enableIcons) { _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]); } // draw icon
-  _u8g2.drawStr(_labelX, itemY, _labels[item]); // draw label
+  if (_enableLabels) { _u8g2.drawStr(_labelX, itemY, _labels[item]); } // draw label
 }
 
 void Oled_menu::draw() { 

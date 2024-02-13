@@ -44,28 +44,30 @@ class Oled_menu {
     int getSelected();
 
   private:
+    void drawItem(int item, int itemY);
+
     const uint16_t _regularFont = u8g2_font_7x13_mf;
     const uint16_t _boldFont = u8g2_font_7x13B_mf;
+
     const int _previousY = 15;
     const int _selectedY = 37;
     const int _nextY = 59;
-
     const int _iconX = 4;
 
     int _labelX = 6;
     int _outlineWidth = 120;
 
-    void drawItem(int item, int itemY);
-
+    int _size;
+    bool _enableLabels = false;
     bool _enableOutline = true;
     bool _enableScrollbar = true;
     bool _enableIcons = false;
     bool _enableBold = true;
 
-    int _size;
     int _selected = 0;//öl
     int _previous;
     int _next;
+
     char** _labels;
     const unsigned char** _icons;
 };

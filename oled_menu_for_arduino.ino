@@ -3,6 +3,7 @@
 Oled_menu pall;
 
 char balls[][11] = { "gg", "hanoos", "the zaza", "bingchen", "lailo" };
+// char balls[][11] = { "", "", "", "", "" };
 
 // start icon 16x16px
 const unsigned char bitmapStartIcon [] PROGMEM = {
@@ -38,7 +39,8 @@ const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIco
 
 void setup() {
   pall.begin();
-  pall.config(5, true, true, true, true);
+  pall.setSize(5);
+  // pall.config(5, false, true, false, false);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
@@ -47,4 +49,8 @@ void setup() {
 void loop() {
   delay(2000);
   pall.down();
+  pall.enableScrollbar(true);
+  delay(2000);
+  pall.down();
+  pall.enableScrollbar(false);
 }
