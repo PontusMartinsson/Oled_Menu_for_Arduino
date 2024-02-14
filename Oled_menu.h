@@ -51,21 +51,13 @@ class Oled_menu {
     int getSelected();
 
   private:
-    void drawItem(int item, int itemY);
+    void drawItem(byte item, byte itemY);
 
-    const uint16_t _regularFont = u8g2_font_7x13_mf;
-    const uint16_t _boldFont = u8g2_font_7x13B_mf;
+    byte _labelXMin = 6;
+    byte _labelXMax = 115;
+    byte _outlineWidth = 120;
 
-    const int _previousY = 15;
-    const int _selectedY = 37;
-    const int _nextY = 59;
-    const int _iconX = 4;
-
-    int _labelXMin = 6;
-    int _labelXMax = 115;
-    int _outlineWidth = 120;
-
-    int _size;
+    byte _size;
     bool _enableLabels = false;
     bool _enableOutline = false;
     bool _enableScrollbar = false;
@@ -73,17 +65,10 @@ class Oled_menu {
     bool _enableCenter = false;
     bool _enableBold = false;
 
-    int _selected = 0;//öl
-    int _previous;
-    int _next;
+    byte _selected = 0;//öl
 
     char** _labels;
-    const unsigned char** _icons;
-
-    // int _values[];
-    // int _valueMin[];
-    // int _valueMax[];
-    // int _valueIncrement[];
+    unsigned char** _icons;
 };
 
 #endif

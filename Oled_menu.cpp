@@ -97,9 +97,10 @@ void Oled_menu::setIcon(int item, const unsigned char* icon) {
   _icons[item] = icon;
 }
 
-void Oled_menu::drawItem(int item, int itemY) {
-  const int _iconY = itemY - 13;
-  _u8g2.setFont((_enableBold && item == _selected) ? _boldFont : _regularFont); // set the correct font
+void Oled_menu::drawItem(byte item, byte itemY) {
+  const byte _iconX = 4;
+  const byte _iconY = itemY - 13;
+  _u8g2.setFont((_enableBold && item == _selected) ? u8g2_font_7x13B_mf : u8g2_font_7x13_mf); // set the correct font
 
   // calculate starting x coordinate for the label
   int labelX;
@@ -111,8 +112,12 @@ void Oled_menu::drawItem(int item, int itemY) {
 }
 
 void Oled_menu::draw() { 
-  _previous = (_selected + _size) % (_size + 1); // set _prev to one more than _selected and wrap if beyond the bounds of the menu
-  _next = (_selected + 1) % (_size + 1); // set _next to one less than _selected and wrap if beyond the bounds of the menu
+  const byte _previousY = 15;
+  const byte _selectedY = 37;
+  const byte _nextY = 59;
+
+  byte _previous = (_selected + _size) % (_size + 1); // set _prev to one more than _selected and wrap if beyond the bounds of the menu
+  byte _next = (_selected + 1) % (_size + 1); // set _next to one less than _selected and wrap if beyond the bounds of the menu
 
   _u8g2.clearBuffer();
 
