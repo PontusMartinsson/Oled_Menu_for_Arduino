@@ -23,15 +23,17 @@ class Oled_menu {
     void enableIcons(bool enable);
     // Enable/disable values
     void enableValues(bool enable);
+    // Enable/disable label centering
+    void enableCenter(bool enable);
     // Enable/disable bold text on selected item
     void enableBold(bool enable);
     // Configure all options
-    void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool bold);
+    void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold);
 
     // Specify all labels
     void labels(char labelArray[][_labelSize]); 
     // Specify label, requires labels() to have been set
-    void setLabel(char label, int item);
+    void setLabel(const char* label, int item);
     // Specify all icons
     void icons(const unsigned char* iconArray[]);
     // Specify icon, requires icons() to have been set
@@ -59,7 +61,8 @@ class Oled_menu {
     const int _nextY = 59;
     const int _iconX = 4;
 
-    int _labelX = 6;
+    int _labelXMin = 6;
+    int _labelXMax = 115;
     int _outlineWidth = 120;
 
     int _size;
@@ -67,6 +70,7 @@ class Oled_menu {
     bool _enableOutline = true;
     bool _enableScrollbar = true;
     bool _enableIcons = false;
+    bool _enableCenter = false;
     bool _enableBold = true;
 
     int _selected = 0;//öl
@@ -75,6 +79,11 @@ class Oled_menu {
 
     char** _labels;
     const unsigned char** _icons;
+
+    // int _values[];
+    // int _valueMin[];
+    // int _valueMax[];
+    // int _valueIncrement[];
 };
 
 #endif

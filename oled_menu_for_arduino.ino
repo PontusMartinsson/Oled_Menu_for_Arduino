@@ -36,13 +36,17 @@ const unsigned char bitmapLifeIcon [] PROGMEM = {
 
 const unsigned char* grer[] = {bitmapStartIcon, bitmapPlayersIcon, bitmapTimeIcon, bitmapTimeLimitIcon, bitmapLifeIcon};
 
+char dovnasty[] = "gru cosplay";
+
 void setup() {
   pall.begin();
-  pall.setSize(5);
-  pall.config(5, false, false, false, false, false);
+  pall.config(4, false, false, false, false, true, false);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
+  pall.setLabel(dovnasty, 1);
+  pall.setLabel("gru cosplay", 0);
+  pall.setSize(7);
 }
 
 void loop() {

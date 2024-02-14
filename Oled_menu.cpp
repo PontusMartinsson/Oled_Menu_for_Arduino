@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #include <U8g2lib.h>
 
-U8G2_SSD1306_128X64_NONAME_F_SW_I2C _u8g2(U8G2_R0, SCL, SDA, U8X8_PIN_NONE); // create the oled display object
+U8G2_SSD1306_128X64_NONAME_F_SW_I2C _u8g2(U8G2_R0, SCL, SDA, U8X8_PIN_NONE);
 
 Oled_menu::Oled_menu() {}
 
@@ -30,29 +30,39 @@ void Oled_menu::enableOutline(bool enable) {
 void Oled_menu::enableScrollbar(bool enable) {
   _enableScrollbar = enable;
   _outlineWidth = enable ? 120 : 128;
+  _labelXMax = enable ? 115 : 123;
 }
 
 void Oled_menu::enableIcons(bool enable) {
   _enableIcons = enable;
-  _labelX = enable ? 25 : 6;
+  _labelXMin = enable ? 25 : 6;
+}
+
+void Oled_menu::enableCenter(bool enable) {
+  _enableCenter = enable;
 }
 
 void Oled_menu::enableBold(bool enable) {
   _enableBold = enable;
 }
 
-void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool bold) {
+void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold) {
   setSize(size);
   enableLabels(labels);
   enableOutline(outline);
   enableScrollbar(scrollbar);
   enableIcons(icons);
+  enableCenter(center);
   enableBold(bold);
 }
-
 void Oled_menu::labels(char labelArray[][_labelSize]) {
   _enableLabels = true;
-  int tempSize = _size + 1;
+  int tempSize;
+
+  // calculate first dimension of labelArray
+  while (labelArray[tempSize][0] != '\0') {
+    tempSize++;
+  }
 
   // free memory if _labels is already allocated
   if (_labels != nullptr) {
@@ -76,6 +86,11 @@ void Oled_menu::labels(char labelArray[][_labelSize]) {
   }
 }
 
+void Oled_menu::setLabel(const char* label, int item) {
+  _enableLabels = true;
+  strncpy(_labels[item], label, _labelSize - 1);
+}
+
 void Oled_menu::icons(const unsigned char* iconArray[]) {
   _icons = iconArray;
 }
@@ -84,8 +99,12 @@ void Oled_menu::drawItem(int item, int itemY) {
   const int _iconY = itemY - 13;
   _u8g2.setFont((_enableBold && item == _selected) ? _boldFont : _regularFont); // set the correct font
 
+  int tempLabelX;
+  if (_enableCenter) { tempLabelX = (_labelXMax - _labelXMin) / 2 + _labelXMin - _u8g2.getStrWidth(_labels[item]) / 2; }
+  else { tempLabelX = _labelXMin; }
+
   if (_enableIcons) { _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]); } // draw icon
-  if (_enableLabels) { _u8g2.drawStr(_labelX, itemY, _labels[item]); } // draw label
+  if (_enableLabels) { _u8g2.drawStr(tempLabelX, itemY, _labels[item]); } // draw label
 }
 
 void Oled_menu::draw() { 
