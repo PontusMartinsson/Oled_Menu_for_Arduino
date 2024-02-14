@@ -56,43 +56,45 @@ void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool
   enableBold(bold);
 }
 void Oled_menu::labels(char labelArray[][_labelSize]) {
-  _enableLabels = true;
-  int tempSize;
+  int arraySize = 0;
 
   // calculate first dimension of labelArray
-  while (labelArray[tempSize][0] != '\0') {
-    tempSize++;
+  while (labelArray[arraySize][0] != '\0') {
+    arraySize++;
   }
 
   // free memory if _labels is already allocated
   if (_labels != nullptr) {
-    for (int i = 0; i < tempSize; i++) {
+    for (int i = 0; i < arraySize; i++) {
       delete[] _labels[i];
     }
     delete[] _labels;
   }
 
   // allocate memory for _labels
-  _labels = new char*[tempSize];
-  for (int i = 0; i < tempSize; i++) {
+  _labels = new char*[arraySize];
+  for (int i = 0; i < arraySize; i++) {
     _labels[i] = new char[_labelSize];
   }
 
   // copy data from labelArray to _labels
-  for (int i = 0; i < tempSize; i++) {
+  for (int i = 0; i < arraySize; i++) {
     for (int j = 0; j < _labelSize; j++) {
       _labels[i][j] = labelArray[i][j];
     }
   }
 }
 
-void Oled_menu::setLabel(const char* label, int item) {
-  _enableLabels = true;
+void Oled_menu::setLabel(int item, const char* label) {
   strncpy(_labels[item], label, _labelSize - 1);
 }
 
 void Oled_menu::icons(const unsigned char* iconArray[]) {
   _icons = iconArray;
+}
+
+void Oled_menu::setIcon(int item, const unsigned char* icon) {
+  _icons[item] = icon;
 }
 
 void Oled_menu::drawItem(int item, int itemY) {

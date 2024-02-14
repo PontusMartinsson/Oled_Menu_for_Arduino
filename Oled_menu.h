@@ -33,11 +33,11 @@ class Oled_menu {
     // Specify all labels
     void labels(char labelArray[][_labelSize]); 
     // Specify label, requires labels() to have been set
-    void setLabel(const char* label, int item);
+    void setLabel(int item, const char* label);
     // Specify all icons
     void icons(const unsigned char* iconArray[]);
     // Specify icon, requires icons() to have been set
-    void setIcon(const unsigned char* icon, int item);
+    void setIcon(int item, const unsigned char* icon);
 
     // Draw the menu
     void draw();
@@ -67,11 +67,11 @@ class Oled_menu {
 
     int _size;
     bool _enableLabels = false;
-    bool _enableOutline = true;
-    bool _enableScrollbar = true;
+    bool _enableOutline = false;
+    bool _enableScrollbar = false;
     bool _enableIcons = false;
     bool _enableCenter = false;
-    bool _enableBold = true;
+    bool _enableBold = false;
 
     int _selected = 0;//öl
     int _previous;
