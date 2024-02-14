@@ -1,14 +1,14 @@
-#ifndef Oled_menu_h
-#define Oled_menu_h
+#ifndef PotusOledMenu_h
+#define PotusOledMenu_h
 
 #include "Arduino.h"
 #include <U8g2lib.h>
 
 #define _labelSize 18
 
-class Oled_menu {
+class PotusOledMenu {
   public:
-    Oled_menu();
+    PotusOledMenu();
     void begin();
 
     // Set the number of menu items

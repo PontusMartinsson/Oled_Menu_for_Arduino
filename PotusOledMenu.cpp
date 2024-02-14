@@ -1,12 +1,12 @@
-#include "Oled_menu.h"
+#include "PotusOledMenu.h"
 #include "Arduino.h"
 #include <U8g2lib.h>
 
 U8G2_SSD1306_128X64_NONAME_F_SW_I2C _u8g2(U8G2_R0, SCL, SDA, U8X8_PIN_NONE);
 
-Oled_menu::Oled_menu() {}
+PotusOledMenu::PotusOledMenu() {}
 
-void Oled_menu::begin() {
+void PotusOledMenu::begin() {
   _u8g2.begin();
   _u8g2.setBitmapMode(1);
   _u8g2.setColorIndex(1);
@@ -15,38 +15,38 @@ void Oled_menu::begin() {
   Serial.begin(9600);
 }
 
-void Oled_menu::setSize(int size) {
+void PotusOledMenu::setSize(int size) {
   _size = size - 1;
 }
 
-void Oled_menu::enableLabels(bool enable) {
+void PotusOledMenu::enableLabels(bool enable) {
   _enableLabels = enable;
 }
 
-void Oled_menu::enableOutline(bool enable) {
+void PotusOledMenu::enableOutline(bool enable) {
   _enableOutline = enable;
 }
 
-void Oled_menu::enableScrollbar(bool enable) {
+void PotusOledMenu::enableScrollbar(bool enable) {
   _enableScrollbar = enable;
   _outlineWidth = enable ? 120 : 128;
   _labelXMax = enable ? 115 : 123;
 }
 
-void Oled_menu::enableIcons(bool enable) {
+void PotusOledMenu::enableIcons(bool enable) {
   _enableIcons = enable;
   _labelXMin = enable ? 25 : 6;
 }
 
-void Oled_menu::enableCenter(bool enable) {
+void PotusOledMenu::enableCenter(bool enable) {
   _enableCenter = enable;
 }
 
-void Oled_menu::enableBold(bool enable) {
+void PotusOledMenu::enableBold(bool enable) {
   _enableBold = enable;
 }
 
-void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold) {
+void PotusOledMenu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold) {
   setSize(size);
   enableLabels(labels);
   enableOutline(outline);
@@ -55,7 +55,7 @@ void Oled_menu::config(int size, bool labels, bool outline, bool scrollbar, bool
   enableCenter(center);
   enableBold(bold);
 }
-void Oled_menu::labels(char labelArray[][_labelSize]) {
+void PotusOledMenu::labels(char labelArray[][_labelSize]) {
   int arraySize = 0;
 
   // calculate first dimension of labelArray
@@ -85,19 +85,19 @@ void Oled_menu::labels(char labelArray[][_labelSize]) {
   }
 }
 
-void Oled_menu::setLabel(int item, const char* label) {
+void PotusOledMenu::setLabel(int item, const char* label) {
   strncpy(_labels[item], label, _labelSize - 1);
 }
 
-void Oled_menu::icons(const unsigned char* iconArray[]) {
+void PotusOledMenu::icons(const unsigned char* iconArray[]) {
   _icons = iconArray;
 }
 
-void Oled_menu::setIcon(int item, const unsigned char* icon) {
+void PotusOledMenu::setIcon(int item, const unsigned char* icon) {
   _icons[item] = icon;
 }
 
-void Oled_menu::drawItem(byte item, byte itemY) {
+void PotusOledMenu::drawItem(byte item, byte itemY) {
   const byte _iconX = 4;
   const byte _iconY = itemY - 13;
   _u8g2.setFont((_enableBold && item == _selected) ? u8g2_font_7x13B_mf : u8g2_font_7x13_mf); // set the correct font
@@ -111,7 +111,7 @@ void Oled_menu::drawItem(byte item, byte itemY) {
   if (_enableLabels) { _u8g2.drawStr(labelX, itemY, _labels[item]); } // draw label
 }
 
-void Oled_menu::draw() { 
+void PotusOledMenu::draw() { 
   const byte _previousY = 15;
   const byte _selectedY = 37;
   const byte _nextY = 59;
@@ -142,21 +142,21 @@ void Oled_menu::draw() {
   _u8g2.sendBuffer();
 }
 
-void Oled_menu::up() {
+void PotusOledMenu::up() {
   _selected = (_selected + _size) % (_size + 1); // increment _selected and wrap if beyond the bounds of the menu
   draw();
 }
 
-void Oled_menu::down() {
+void PotusOledMenu::down() {
   _selected = (_selected + 1) % (_size + 1); // decrement _selected and wrap if beyond the bounds of the menu
   draw();
 }
 
-void Oled_menu::jump(int item) {
+void PotusOledMenu::jump(int item) {
   _selected = item;
   draw();
 }
 
-int Oled_menu::getSelected() {
+int PotusOledMenu::getSelected() {
   return _selected;
 }
