@@ -40,10 +40,15 @@ char dovnasty[] = "gru cosplay";
 
 void setup() {
   pall.begin();
-  pall.config(5, true, false, false, true, true, false);
+  pall.config(5, 1, 1, 1, 1, 1, 1);
   pall.labels(balls);
   pall.icons(grer);
   pall.draw();
+
+  // test();
+}
+
+void test() {
   pall.setLabel(1, dovnasty);
   pall.setLabel(0, "gru cosplay");
   pall.setSize(7);

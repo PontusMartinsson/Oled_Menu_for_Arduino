@@ -101,12 +101,13 @@ void Oled_menu::drawItem(int item, int itemY) {
   const int _iconY = itemY - 13;
   _u8g2.setFont((_enableBold && item == _selected) ? _boldFont : _regularFont); // set the correct font
 
-  int tempLabelX;
-  if (_enableCenter) { tempLabelX = (_labelXMax - _labelXMin) / 2 + _labelXMin - _u8g2.getStrWidth(_labels[item]) / 2; }
-  else { tempLabelX = _labelXMin; }
+  // calculate starting x coordinate for the label
+  int labelX;
+  if (_enableCenter) { labelX = (_labelXMax - _labelXMin) / 2 + _labelXMin - _u8g2.getStrWidth(_labels[item]) / 2; } 
+  else { labelX = _labelXMin; }
 
   if (_enableIcons) { _u8g2.drawXBMP(_iconX, _iconY, 16, 16, _icons[item]); } // draw icon
-  if (_enableLabels) { _u8g2.drawStr(tempLabelX, itemY, _labels[item]); } // draw label
+  if (_enableLabels) { _u8g2.drawStr(labelX, itemY, _labels[item]); } // draw label
 }
 
 void Oled_menu::draw() { 
