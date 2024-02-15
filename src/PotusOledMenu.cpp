@@ -13,8 +13,6 @@ void PotusOledMenu::begin() {
   _u8g2.setBitmapMode(1);
   _u8g2.setColorIndex(1);
   _u8g2.setPowerSave(0);
-
-  Serial.begin(9600);
 }
 
 void PotusOledMenu::setSize(int size) {
