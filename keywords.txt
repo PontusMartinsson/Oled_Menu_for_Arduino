@@ -1,0 +1,29 @@
+# Syntax Coloring Map For PotusOledMenu
+
+# Datatypes (KEYWORD1)
+
+# Methods and Functions (KEYWORD2)
+begin	KEYWORD2
+setSize	KEYWORD2
+enableLabels	KEYWORD2
+enableOutline	KEYWORD2
+enableScrollbar	KEYWORD2
+enableIcons	KEYWORD2
+enableValues	KEYWORD2
+enableCenter	KEYWORD2
+enableBold	KEYWORD2
+config	KEYWORD2
+labels	KEYWORD2
+setLabel	KEYWORD2
+icons	KEYWORD2
+setIcon	KEYWORD2
+draw	KEYWORD2
+up	KEYWORD2
+down	KEYWORD2
+jump	KEYWORD2
+getSelected	KEYWORD2
+
+# Instances (KEYWORD2)
+PotusOledMenu	KEYWORD2
+
+# Constants (LITERAL1)
