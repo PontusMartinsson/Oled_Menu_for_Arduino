@@ -4,8 +4,6 @@
 #include "Arduino.h"
 #include <U8g2lib.h>
 
-#define _labelSize 18
-
 class PotusOledMenu {
   public:
     PotusOledMenu();
@@ -31,7 +29,7 @@ class PotusOledMenu {
     void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold);
 
     // Specify all labels
-    void labels(char labelArray[][_labelSize]); 
+    void labels(char labelArray[][18]); 
     // Specify label, requires labels() to have been set
     void setLabel(int item, const char* label);
     // Specify all icons
