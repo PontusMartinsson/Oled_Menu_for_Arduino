@@ -23,6 +23,11 @@ void PotusOledMenu::enableLabels(bool enable) {
   _enableLabels = enable;
 }
 
+void PotusOledMenu::enableIcons(bool enable) {
+  _enableIcons = enable;
+  _labelXMin = enable ? 25 : 6;
+}
+
 void PotusOledMenu::enableOutline(bool enable) {
   _enableOutline = enable;
 }
@@ -33,11 +38,6 @@ void PotusOledMenu::enableScrollbar(bool enable) {
   _labelXMax = enable ? 115 : 123;
 }
 
-void PotusOledMenu::enableIcons(bool enable) {
-  _enableIcons = enable;
-  _labelXMin = enable ? 25 : 6;
-}
-
 void PotusOledMenu::enableCenter(bool enable) {
   _enableCenter = enable;
 }
@@ -46,12 +46,12 @@ void PotusOledMenu::enableBold(bool enable) {
   _enableBold = enable;
 }
 
-void PotusOledMenu::config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold) {
+void PotusOledMenu::config(int size, bool labels, bool icons, bool outline, bool scrollbar, bool center, bool bold) {
   setSize(size);
   enableLabels(labels);
+  enableIcons(icons);
   enableOutline(outline);
   enableScrollbar(scrollbar);
-  enableIcons(icons);
   enableCenter(center);
   enableBold(bold);
 }

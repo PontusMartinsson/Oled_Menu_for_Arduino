@@ -26,7 +26,7 @@ class PotusOledMenu {
     // Enable/disable bold text on selected item
     void enableBold(bool enable);
     // Configure all options
-    void config(int size, bool labels, bool outline, bool scrollbar, bool icons, bool center, bool bold);
+    void config(int size, bool labels, bool icons, bool outline, bool scrollbar, bool center, bool bold);
 
     // Specify all labels
     void labels(char labelArray[][18]); 
