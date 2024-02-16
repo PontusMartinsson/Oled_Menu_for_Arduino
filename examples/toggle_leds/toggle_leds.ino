@@ -84,6 +84,7 @@ void loop() {
   }
   else if (digitalRead(selectPin)) {
     toggleLed(menu.getSelected());
+    delay(100);
   }
 }
 
