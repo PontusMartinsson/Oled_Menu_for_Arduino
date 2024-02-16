@@ -36,8 +36,6 @@
 #include "Arduino.h"
 #include <U8g2lib.h>
 
-#define _labelSize 18
-
 U8G2_SSD1306_128X64_NONAME_F_SW_I2C _u8g2(U8G2_R0, SCL, SDA, U8X8_PIN_NONE);
 
 PotusOledMenu::PotusOledMenu() {}
@@ -108,14 +106,14 @@ void PotusOledMenu::labels(char* labelArray[]) {
 
   _labels = new char*[arraySize]; // allocate memory for _labels
   for (int i = 0; i < arraySize; i++) {
-    int labelSize = strlen(labelArray[i]) + 1; // setermine the size of the current string
+    int labelSize = strlen(labelArray[i]) + 1; // determine the size of the current string
     _labels[i] = new char[labelSize]; // allocate memory for the current label
-    strcpy(_labels[i], labelArray[i]); // copy the string
+    strcpy(_labels[i], labelArray[i]); // copy string
   }
 }
 
 void PotusOledMenu::setLabel(int item, const char* label) {
-  strncpy(_labels[item], label, _labelSize - 1);
+  strncpy(_labels[item], label, strlen(label) + 1); // copy string
 }
 
 void PotusOledMenu::icons(const unsigned char* iconArray[]) {
