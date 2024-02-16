@@ -52,7 +52,7 @@ char* text[] = {
   "But drinking",
   "is a job...",
   "for drunkman.'",
-  "-Jouko",
+  "-Jouko aka. Pekka",
   ""
 }; 
 
