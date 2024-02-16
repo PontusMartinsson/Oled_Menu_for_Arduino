@@ -63,7 +63,7 @@ class PotusOledMenu {
     void config(int size, bool labels, bool icons, bool outline, bool scrollbar, bool center, bool bold);
 
     // Specify all labels
-    void labels(char labelArray[][18]); 
+    void labels(char* labelArray[]); 
     // Specify label, requires labels() to have been set
     void setLabel(int item, const char* label);
     // Specify all icons

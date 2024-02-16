@@ -89,11 +89,12 @@ void PotusOledMenu::config(int size, bool labels, bool icons, bool outline, bool
   enableCenter(center);
   enableBold(bold);
 }
-void PotusOledMenu::labels(char labelArray[][_labelSize]) {
+
+void PotusOledMenu::labels(char* labelArray[]) {
   int arraySize = 0;
 
   // calculate first dimension of labelArray
-  while (labelArray[arraySize][0] != '\0') {
+  while (labelArray[arraySize] != nullptr) {
     arraySize++;
   }
 
@@ -105,17 +106,11 @@ void PotusOledMenu::labels(char labelArray[][_labelSize]) {
     delete[] _labels;
   }
 
-  // allocate memory for _labels
-  _labels = new char*[arraySize];
+  _labels = new char*[arraySize]; // allocate memory for _labels
   for (int i = 0; i < arraySize; i++) {
-    _labels[i] = new char[_labelSize];
-  }
-
-  // copy data from labelArray to _labels
-  for (int i = 0; i < arraySize; i++) {
-    for (int j = 0; j < _labelSize; j++) {
-      _labels[i][j] = labelArray[i][j];
-    }
+    int labelSize = strlen(labelArray[i]) + 1; // setermine the size of the current string
+    _labels[i] = new char[labelSize]; // allocate memory for the current label
+    strcpy(_labels[i], labelArray[i]); // copy the string
   }
 }
 
