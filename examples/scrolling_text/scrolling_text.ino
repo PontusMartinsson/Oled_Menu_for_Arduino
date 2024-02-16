@@ -38,12 +38,13 @@ use this library. This was made purely to showcase how automatic scrolling and
 only showing certain elements could be used.
 */
 
-#include <PotusOledMenu.h>
+#include "PotusOledMenu.h"
 
 PotusOledMenu menu;
 
-char text[][18] = {
-  " ",
+char* text[] = {
+  "",
+  "",
   "'My wife",
   "constantly",
   "reminds me of",
@@ -52,12 +53,12 @@ char text[][18] = {
   "is a job...",
   "for drunkman.'",
   "-Jouko",
-  " "
+  ""
 }; 
 
 void setup() {
   menu.begin();
-  menu.setSize(10);
+  menu.setSize(11);
   menu.enableLabels(true);
   menu.enableCenter(true);
   menu.labels(text);

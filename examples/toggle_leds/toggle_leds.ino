@@ -41,7 +41,7 @@
 
 PotusOledMenu menu;
 
-char labels[ledNum][18] = { "Light 1", "Light 2", "Light 3", "Light 4", "Light 5" }; // array with labels, second dimension has to be 18
+char* labels[ledNum] = { "Light 1", "Light 2", "Light 3", "Light 4", "Light 5" }; // array with labels, second dimension has to be 18
 
 // 16x16px .xbm bitmaps generated using convertio.co
 const unsigned char lightbulbOff[] PROGMEM = {
@@ -72,6 +72,7 @@ void setup() {
   menu.draw(); // display the menu
 }
 
+// read buttons and apply changes accordingly
 void loop() {
   if (digitalRead(upPin)) {
     menu.up();
@@ -86,6 +87,7 @@ void loop() {
   }
 }
 
+// toggle everything
 void toggleLed(int led) {
   ledStates[led] = ledStates[led] ? 0 : 1; // toggle the selected item led state
   digitalWrite(ledPins[led], ledStates[led]); // toggle the selected led

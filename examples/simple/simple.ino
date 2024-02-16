@@ -39,7 +39,7 @@
 
 PotusOledMenu menu; // create instance of PotusOledMenu class
 
-char labels[][18] = { "Heart", "Play", "People", "Clock", "Arrow", "House" }; // array with labels, second dimension has to be 18
+char* labels[] = { "Heart", "Play", "People", "Clock", "Arrow", "House" }; // pointer array with labels
 
 // 16x16px .xbm bitmaps generated using convertio.co
 const unsigned char heart [] PROGMEM = {

@@ -40,7 +40,7 @@
 
 PotusOledMenu menu; // create instance of PotusOledMenu class
 
-char labels[][18] = { "Heart", "Play", "People", "Clock", "Arrow", "House" }; // array with labels, second dimension has to be 18
+char* labels[] = { "Heart", "Play", "People", "Clock", "Arrow", "House" }; // pointer array with labels
 unsigned char* icons[] = { heart, play, people, clock, arrow, house }; // pointer array with bitmaps stored in bitmaps.h
 
 void setup() {
