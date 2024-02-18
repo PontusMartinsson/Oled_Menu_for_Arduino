@@ -65,6 +65,11 @@ void setup() {
   pinMode(downPin, INPUT);
   pinMode(selectPin, INPUT);
 
+  // set all led pins to output
+  for (int i = 0; i < ledNum; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+
   menu.begin();
   menu.config(ledNum, 1, 1, 1, 1, 0, 1); // configure options
   menu.labels(labels); // set labels
