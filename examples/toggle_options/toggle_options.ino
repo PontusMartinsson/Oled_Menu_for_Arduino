@@ -48,6 +48,10 @@ const unsigned char* icons[optionNum] = { label, icon, outline, scrollbar, cente
 bool options[optionNum] = { 1, 1, 1, 1, 1, 1 }; // array with option states, all true by default
 
 void setup() {
+  pinMode(upPin, INPUT);
+  pinMode(downPin, INPUT);
+  pinMode(selectPin, INPUT);
+
   menu.begin();
   menu.config(optionNum, 1, 1, 1, 1, 1, 1);
   menu.labels(labels);
