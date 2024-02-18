@@ -47,6 +47,8 @@ const unsigned char* icons[optionNum] = { label, icon, outline, scrollbar, cente
 
 bool options[optionNum] = { 1, 1, 1, 1, 1, 1 }; // array with option states, all true by default
 
+bool buttonPressed = false;
+
 void setup() {
   pinMode(upPin, INPUT);
   pinMode(downPin, INPUT);
@@ -61,17 +63,26 @@ void setup() {
 
 // read buttons and apply changes accordingly
 void loop() {
-  if (digitalRead(upPin)) {
+  bool upPressed = digitalRead(upPin);
+  bool downPressed = digitalRead(downPin);
+  bool selectPressed = digitalRead(selectPin);
+
+  if (upPressed && !(buttonPressed)) { // up
+    buttonPressed = true;
     menu.up();
-    delay(100);
   }
-  else if (digitalRead(downPin)) {
+  else if (downPressed && !(buttonPressed)) { // down
+    buttonPressed = true;
     menu.down();
-    delay(100);
   }
-  else if (digitalRead(selectPin)) {
+  else if (selectPressed && !(buttonPressed)) { // select
+    buttonPressed = true;
+
     options[menu.getSelected()] = options[menu.getSelected()] ? 0 : 1; // toggle the selected option
     menu.config(optionNum, options[0], options[1], options[2], options[3], options[4], options[5]); // apply options
     menu.draw(); // refresh menu
+  }
+  else if (buttonPressed && !upPressed && !downPressed && !selectPressed) { // reset buttonPressed when no button is pressed
+    buttonPressed = false;
   }
 }

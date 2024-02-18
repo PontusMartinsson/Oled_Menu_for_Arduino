@@ -43,6 +43,8 @@ PotusOledMenu menu; // create instance of PotusOledMenu class
 char* labels[] = { "Heart", "Play", "People", "Clock", "Arrow", "House" }; // pointer array with labels
 unsigned char* icons[] = { heart, play, people, clock, arrow, house }; // pointer array with bitmaps stored in bitmaps.h
 
+bool buttonPressed = false;
+
 void setup() {
   pinMode(upPin, INPUT);
   pinMode(downPin, INPUT);
@@ -55,14 +57,20 @@ void setup() {
   menu.draw(); // display menu
 }
 
+// read buttons and scroll menu accordingly
 void loop() {
-  // read buttons and scroll menu accordingly
-  if (digitalRead(upPin)) {
+  bool upPressed = digitalRead(upPin);
+  bool downPressed = digitalRead(downPin);
+
+  if (upPressed && !(buttonPressed)) { // up
+    buttonPressed = true;
     menu.up();
-    delay(100);
   }
-  else if (digitalRead(downPin)) {
+  else if (downPressed && !(buttonPressed)) { // down
+    buttonPressed = true;
     menu.down();
-    delay(100);
+  }
+  else if (buttonPressed && !upPressed && !downPressed) { // reset buttonPressed when no button is pressed
+    buttonPressed = false;
   }
 }

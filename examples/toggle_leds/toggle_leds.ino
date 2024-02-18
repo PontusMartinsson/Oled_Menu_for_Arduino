@@ -57,8 +57,9 @@ const unsigned char lightbulbOn[] PROGMEM = {
 unsigned char* icons[ledNum] = { lightbulbOff, lightbulbOff, lightbulbOff, lightbulbOff, lightbulbOff }; // pointer array with icons
 
 bool ledStates[ledNum] = { 0, 0, 0, 0, 0 }; // array with led-states
-
 const int ledPins[ledNum] = { 8, 9, 10, 11, 12 }; // array with led pin numbers
+
+bool buttonPressed = false;
 
 void setup() {
   pinMode(upPin, INPUT);
@@ -79,17 +80,24 @@ void setup() {
 
 // read buttons and apply changes accordingly
 void loop() {
-  if (digitalRead(upPin)) {
+  bool upPressed = digitalRead(upPin);
+  bool downPressed = digitalRead(downPin);
+  bool selectPressed = digitalRead(selectPin);
+
+  if (upPressed && !(buttonPressed)) { // up
+    buttonPressed = true;
     menu.up();
-    delay(100);
   }
-  else if (digitalRead(downPin)) {
+  else if (downPressed && !(buttonPressed)) { // down
+    buttonPressed = true;
     menu.down();
-    delay(100);
   }
-  else if (digitalRead(selectPin)) {
+  else if (selectPressed && !(buttonPressed)) { // select
+    buttonPressed = true;
     toggleLed(menu.getSelected());
-    delay(100);
+  }
+  else if (buttonPressed && !upPressed && !downPressed && !selectPressed) { // reset buttonPressed when no button is pressed
+    buttonPressed = false;
   }
 }
 
