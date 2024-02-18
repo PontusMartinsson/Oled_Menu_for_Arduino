@@ -99,4 +99,5 @@ void toggleLed(int led) {
   digitalWrite(ledPins[led], ledStates[led]); // toggle the selected led
   icons[led] = ledStates[led] ? lightbulbOn : lightbulbOff; // toggle the selected item icon
   menu.setIcon(led, icons[led]); // apply the new icon
+  menu.draw(); // refresh menu
 }
